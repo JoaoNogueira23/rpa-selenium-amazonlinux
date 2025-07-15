@@ -1,0 +1,15 @@
+services:
+  selenium:
+    image: selenium/standalone-chrome
+    ports:
+      - "4444:4444"
+
+  rpa:
+    build: .
+    depends_on:
+      - selenium
+    volumes:
+      - ./scripts:/root/rpa
+    stdin_open: true
+    tty: true
+    user: root
