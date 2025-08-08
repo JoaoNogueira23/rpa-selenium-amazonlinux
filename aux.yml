@@ -1,0 +1,37 @@
+# depedencias google-chrome
+RUN yum install -y \
+    at-spi2-atk \
+    atk \
+    cups-libs \
+    gtk3 \
+    libXcomposite \
+    libXcursor \
+    libXdamage \
+    libXext \
+    libXi \
+    libXrandr \
+    libXrender \
+    libXtst \
+    pango \
+    alsa-lib \
+    libdrm \
+    libgbm \
+    nss \
+    nspr \
+    xorg-x11-server-Xvfb \
+    unzip
+
+
+# instalação do google-chrome
+RUN curl -LO https://storage.googleapis.com/chrome-for-testing-public/138.0.7204.94/linux64/chrome-linux64.zip && \
+    unzip chrome-linux64.zip && \
+    mv chrome-linux64 /opt/chrome && \
+    ln -s /opt/chrome/chrome /usr/bin/google-chrome && \
+    rm chrome-linux64.zip
+
+# Instalar ChromeDriver correspondente
+RUN curl -LO https://storage.googleapis.com/chrome-for-testing-public/138.0.7204.94/linux64/chromedriver-linux64.zip && \
+    unzip chromedriver-linux64.zip && \
+    mv chromedriver-linux64/chromedriver /usr/local/bin/chromedriver && \
+    chmod +x /usr/local/bin/chromedriver && \
+    rm -rf chromedriver-linux64*

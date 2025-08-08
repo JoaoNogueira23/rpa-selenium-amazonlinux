@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
 
 
 chrome_options = Options()
@@ -8,10 +9,11 @@ chrome_options.add_argument("--headless")
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument("--disable-dev-shm-usage")
 
-driver = webdriver.Remote(
-    command_executor='http://selenium:4444/wd/hub',
-    options=chrome_options
-)
+# path chromedriver
+path_chromedriver = ""
+
+Service = Service(executable_path=path_chromedriver)
+driver = webdriver.Chrome(service=Service, options=chrome_options)
 driver.get("https://example.com")
 
 title = driver.title
